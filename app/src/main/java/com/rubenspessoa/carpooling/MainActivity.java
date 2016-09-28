@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         registerForContextMenu(usersList);
 
         /*
-
         // Verifica mudanças no servidor de banco de dados.
         mUsersRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -56,9 +55,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }); */
 
-        // Add User to Database
+        // Open AddUser Activity
         mButtonAdd.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, com.rubenspessoa.carpooling.AddActivity.class);
@@ -71,10 +69,6 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, com.rubenspessoa.carpooling.UserActivity.class);
                 intent.putExtra("index", position);
-                /*
-                for (int i = 0; i < usersList.getCount(); i++) {
-                    if (usersList.getItemAtPosition(i))
-                }*/
                 startActivity(intent);
             }
         });

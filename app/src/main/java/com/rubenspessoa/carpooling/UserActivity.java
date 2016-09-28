@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.rubenspessoa.carpooling.Util.Manager;
 import com.rubenspessoa.carpooling.Util.User;
 
+import java.text.DecimalFormat;
+
 public class UserActivity extends AppCompatActivity {
 
     TextView name;
@@ -31,10 +33,20 @@ public class UserActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         Intent intent = getIntent();
         User user = Manager.getUser(intent.getExtras().getInt("index"));
         name.setText(user.name);
-        totalCount.setText(user.rideCount);
-        owe.setText((String) "R$ " + user.rideCount * 2.5);
+        totalCount.setText(String.valueOf(user.rideCount));
+        DecimalFormat df = new DecimalFormat("0.00");
+        owe.setText(
+                ("R$ " +
+                String.valueOf(
+                        df.format(
+                                user.rideCount * 2.5
+                        )
+                )
+        )
+        );
     }
 }

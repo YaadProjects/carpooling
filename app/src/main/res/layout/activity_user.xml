@@ -63,8 +63,8 @@
         android:text="+1 Ride"
         android:id="@id/button2"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/ridesCount"
-        android:layout_toStartOf="@+id/ridesCount" />
+        android:layout_toRightOf="@id/button4"
+        android:layout_toEndOf="@id/button4" />
 
     <Button
         android:layout_width="wrap_content"
@@ -72,8 +72,8 @@
         android:text="-1 Ride"
         android:id="@id/button3"
         android:layout_alignTop="@id/button2"
-        android:layout_toLeftOf="@id/userName"
-        android:layout_toStartOf="@id/userName" />
+        android:layout_toLeftOf="@id/button4"
+        android:layout_toStartOf="@id/button4" />
 
     <Button
         android:layout_width="wrap_content"
