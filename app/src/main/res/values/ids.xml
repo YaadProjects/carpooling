@@ -5,4 +5,12 @@
     <item name="addName" type="id" />
     <item name="listView" type="id" />
     <item name="buttonAdd" type="id" />
+    <item name="userName" type="id" />
+    <item name="textView2" type="id" />
+    <item name="ridesCount" type="id"/>
+    <item name="textView3" type="id" />
+    <item name="cost" type="id"/>
+    <item name="button2" type="id"/>
+    <item name="button3" type="id"/>
+    <item name="button4" type="id"/>
 </resources>

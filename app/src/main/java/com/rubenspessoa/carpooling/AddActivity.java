@@ -32,7 +32,7 @@ public class AddActivity extends AppCompatActivity {
                 String userName = input.getText().toString();
                 User newUser = new User(userName);
                 MainActivity.manager.add(newUser);
-                MainActivity.mUsersRef.child(userName).setValue(newUser);
+                //MainActivity.mUsersRef.child(userName).setValue(newUser);
                 AddActivity.this.finish();
             }
         });

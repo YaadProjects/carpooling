@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Manager {
 
-    List<User> users;
+    static List<User> users;
 
     public Manager() {
         users = new ArrayList<User>();
@@ -24,6 +24,10 @@ public class Manager {
 
     public void remove(User user) {
         users.remove(user);
+    }
+
+    public static User getUser(int index) {
+        return users.get(index);
     }
 
     public List<String> getNames() {
