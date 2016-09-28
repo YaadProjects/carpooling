@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ADD"
-        android:id="@+id/button"
+        android:id="@id/button"
         android:layout_below="@+id/addName"
         android:layout_centerHorizontal="true" />
 
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/addName"
+        android:id="@id/addName"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"

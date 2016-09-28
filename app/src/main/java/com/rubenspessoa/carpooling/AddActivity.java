@@ -19,7 +19,7 @@ public class AddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
 
         input = (EditText) findViewById(R.id.addName);
-        addBtn = (Button) findViewById(R.id.buttonAdd);
+        addBtn = (Button) findViewById(R.id.button);
     }
 
     @Override
@@ -32,6 +32,7 @@ public class AddActivity extends AppCompatActivity {
                 String userName = input.getText().toString();
                 User newUser = new User(userName);
                 MainActivity.manager.add(newUser);
+                MainActivity.mUsersRef.child(userName).setValue(newUser);
                 AddActivity.this.finish();
             }
         });

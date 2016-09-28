@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="listOfUsers" type="id" />
+    <item name="button" type="id"/>
+    <item name="addName" type="id" />
+    <item name="listView" type="id" />
+    <item name="buttonAdd" type="id" />
 </resources>
