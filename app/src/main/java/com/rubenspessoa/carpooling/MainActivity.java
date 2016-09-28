@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        // Cria visualizaçao dos dados na ListView
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, manager.getNames());
         usersList = (ListView) findViewById(R.id.usersList);
         usersList.setAdapter(adapter);
@@ -51,30 +50,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        /*
-        // Verifica mudanças no servidor de banco de dados.
-        mUsersRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                System.out.println(dataSnapshot.getChildrenCount());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.err.println(databaseError.getMessage());
-            }
-        }); */
-
-        // Open AddUser Activity
-        /*
-        mButtonAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        */
 
         usersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
