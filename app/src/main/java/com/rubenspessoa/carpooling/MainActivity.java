@@ -2,6 +2,7 @@ package com.rubenspessoa.carpooling;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         manager = new Manager();
-        mButtonAdd = (Button) findViewById(R.id.buttonAdd);
+        mButtonAdd = (Button) findViewById(R.id.buttonAddUserMain);
     }
 
     @Override
@@ -37,9 +38,19 @@ public class MainActivity extends AppCompatActivity {
 
         // Cria visualizaçao dos dados na ListView
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, manager.getNames());
-        usersList = (ListView) findViewById(R.id.listView);
+        usersList = (ListView) findViewById(R.id.usersList);
         usersList.setAdapter(adapter);
         registerForContextMenu(usersList);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, com.rubenspessoa.carpooling.AddActivity.class);
+                startActivity(intent);
+            }
+        });
 
         /*
         // Verifica mudanças no servidor de banco de dados.
@@ -56,13 +67,14 @@ public class MainActivity extends AppCompatActivity {
         }); */
 
         // Open AddUser Activity
+        /*
         mButtonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, com.rubenspessoa.carpooling.AddActivity.class);
-                startActivity(intent);
+
             }
         });
+        */
 
         usersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

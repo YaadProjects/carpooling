@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="listOfUsers" type="id" />
-    <item name="button" type="id"/>
-    <item name="addName" type="id" />
-    <item name="listView" type="id" />
-    <item name="buttonAdd" type="id" />
+    <item name="usersList" type="id" />
+    <item name="buttonAddUserMain" type="id" />
+    <item name="nameEditText" type="id" />
+    <item name="emailEditText" type="id" />
+    <item name="createUserBtn" type="id"/>
     <item name="userName" type="id" />
-    <item name="textView2" type="id" />
     <item name="ridesCount" type="id"/>
-    <item name="textView3" type="id" />
-    <item name="cost" type="id"/>
-    <item name="button2" type="id"/>
-    <item name="button3" type="id"/>
-    <item name="button4" type="id"/>
+    <item name="ridesTotalCountText" type="id" />
+    <item name="oweText" type="id" />
+    <item name="owe" type="id"/>
+    <item name="addRideBtn" type="id"/>
+    <item name="decreaseRideBtn" type="id"/>
+    <item name="saveUserInfoBtn" type="id"/>
 </resources>

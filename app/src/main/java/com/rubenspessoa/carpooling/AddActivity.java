@@ -11,22 +11,22 @@ import com.rubenspessoa.carpooling.Util.User;
 public class AddActivity extends AppCompatActivity {
 
     EditText input;
-    Button addBtn;
+    Button createUserBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-        input = (EditText) findViewById(R.id.addName);
-        addBtn = (Button) findViewById(R.id.button);
+        input = (EditText) findViewById(R.id.nameEditText);
+        createUserBtn = (Button) findViewById(R.id.createUserBtn);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        addBtn.setOnClickListener(new View.OnClickListener() {
+        createUserBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String userName = input.getText().toString();

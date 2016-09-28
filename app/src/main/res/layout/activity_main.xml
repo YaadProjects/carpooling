@@ -12,18 +12,19 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@id/listView"
+        android:id="@id/usersList"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <Button
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ADD"
-        android:id="@id/buttonAdd"
+        android:layout_gravity="bottom|end"
+        android:src="@android:drawable/ic_input_add"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignRight="@id/usersList"
+        android:layout_alignEnd="@id/usersList" />
 
 </RelativeLayout>

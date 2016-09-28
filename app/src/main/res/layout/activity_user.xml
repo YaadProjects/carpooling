@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Rides Total Count:"
-        android:id="@id/textView2"
+        android:id="@id/ridesTotalCountText"
         android:layout_below="@+id/userName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@id/ridesCount"
-        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignBottom="@id/ridesTotalCountText"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -42,8 +42,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Owe:"
-        android:id="@id/textView3"
-        android:layout_below="@+id/textView2"
+        android:id="@id/oweText"
+        android:layout_below="@id/ridesTotalCountText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -52,8 +52,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
-        android:id="@id/cost"
-        android:layout_alignBottom="@+id/textView3"
+        android:id="@id/owe"
+        android:layout_alignBottom="@id/oweText"
         android:layout_alignRight="@+id/ridesCount"
         android:layout_alignEnd="@+id/ridesCount" />
 
@@ -61,25 +61,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="+1 Ride"
-        android:id="@id/button2"
+        android:id="@id/addRideBtn"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/button4"
-        android:layout_toEndOf="@id/button4" />
+        android:layout_toRightOf="@id/saveUserInfoBtn"
+        android:layout_toEndOf="@id/saveUserInfoBtn" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="-1 Ride"
-        android:id="@id/button3"
-        android:layout_alignTop="@id/button2"
-        android:layout_toLeftOf="@id/button4"
-        android:layout_toStartOf="@id/button4" />
+        android:id="@id/decreaseRideBtn"
+        android:layout_alignTop="@id/addRideBtn"
+        android:layout_toLeftOf="@id/saveUserInfoBtn"
+        android:layout_toStartOf="@id/saveUserInfoBtn" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SAVE"
-        android:id="@id/button4"
+        android:id="@id/saveUserInfoBtn"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 

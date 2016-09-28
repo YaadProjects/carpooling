@@ -3,6 +3,7 @@ package com.rubenspessoa.carpooling;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -13,21 +14,26 @@ import java.text.DecimalFormat;
 
 public class UserActivity extends AppCompatActivity {
 
-    TextView name;
-    TextView totalCount;
-    TextView owe;
-    Button addRide;
-    Button decRide;
+    private TextView username;
+    private TextView ridesCount;
+    private TextView owe;
+    private Button addRideBtn;
+    private Button decreaseRideBtn;
+    private Button saveUserInfoBtn;
+    private User user;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        name = (TextView) findViewById(R.id.userName);
-        totalCount = (TextView) findViewById(R.id.ridesCount);
-        owe = (TextView) findViewById(R.id.cost);
-        addRide = (Button) findViewById(R.id.button2);
-        decRide = (Button) findViewById(R.id.button3);
+        username = (TextView) findViewById(R.id.userName);
+        ridesCount = (TextView) findViewById(R.id.ridesCount);
+        owe = (TextView) findViewById(R.id.owe);
+        addRideBtn = (Button) findViewById(R.id.addRideBtn);
+        decreaseRideBtn = (Button) findViewById(R.id.decreaseRideBtn);
+        saveUserInfoBtn = (Button) findViewById(R.id.saveUserInfoBtn);
     }
 
     @Override
@@ -35,18 +41,39 @@ public class UserActivity extends AppCompatActivity {
         super.onStart();
 
         Intent intent = getIntent();
-        User user = Manager.getUser(intent.getExtras().getInt("index"));
-        name.setText(user.name);
-        totalCount.setText(String.valueOf(user.rideCount));
+        this.user = Manager.getUser(intent.getExtras().getInt("index"));
+        showUpdatedValues();
+
+        addRideBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user.addRide();
+                showUpdatedValues();
+            }
+        });
+
+        decreaseRideBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user.decreaseRide();
+                showUpdatedValues();
+            }
+        });
+
+        saveUserInfoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserActivity.this.finish();
+            }
+        });
+
+
+    }
+
+    private void showUpdatedValues() {
+        this.username.setText(this.user.name);
+        this.ridesCount.setText(String.valueOf(this.user.ridesCount));
         DecimalFormat df = new DecimalFormat("0.00");
-        owe.setText(
-                ("R$ " +
-                String.valueOf(
-                        df.format(
-                                user.rideCount * 2.5
-                        )
-                )
-        )
-        );
+        this.owe.setText(("R$ " + String.valueOf(df.format(user.ridesCount * 2.5))));
     }
 }

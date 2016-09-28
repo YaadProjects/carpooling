@@ -5,29 +5,33 @@ package com.rubenspessoa.carpooling.Util;
  */
 public class User {
 
-    public int rideCount;
+    public int ridesCount;
     public String name;
     public boolean owe;
 
     public User(String name) {
         this.name = name;
-        this.rideCount = 0;
+        this.ridesCount = 0;
         this.owe = false;
     }
 
     public void addRide() {
-        this.rideCount++;
-        if (this.rideCount > 0) {
+        this.ridesCount++;
+        if (this.ridesCount > 0) {
             this.owe = true;
         }
     }
 
     public void decreaseRide() {
-        if (this.rideCount > 0) {
-            this.rideCount--;
+        if (this.ridesCount > 0) {
+            this.ridesCount--;
         } else {
             this.owe = false;
         }
+    }
+
+    public String getName(){
+        return this.name;
     }
 
 
