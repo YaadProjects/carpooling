@@ -24,42 +24,65 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.rubenspessoa.carpooling.Util.Manager;
+import com.rubenspessoa.carpooling.Util.User;
 
 public class MainActivity extends AppCompatActivity {
 
-    static DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-    static DatabaseReference mUsersRef = mRootRef.child("users");
-    static Manager manager;
+    private RecyclerView mUsersList;
+    private DatabaseReference mDatabase;
+    private Button mButtonAdd;
 
-    public ListView usersList;
-    public ArrayAdapter<String> adapter;
-    public Button mButtonAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        manager = new Manager();
+
         mButtonAdd = (Button) findViewById(R.id.buttonAddUserMain);
+
+        mUsersList = (RecyclerView) findViewById(R.id.usersList);
+        mUsersList.setHasFixedSize(true);
+        mUsersList.setLayoutManager(new LinearLayoutManager(this));
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, manager.getNames());
-        usersList = (ListView) findViewById(R.id.usersList);
-        usersList.setAdapter(adapter);
-        registerForContextMenu(usersList);
+        FirebaseRecyclerAdapter<User, UserViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, UserViewHolder>(
+                User.class,
+                R.layout.user_row,
+                UserViewHolder.class,
+                mDatabase
+        ) {
+            @Override
+            protected void populateViewHolder(UserViewHolder viewHolder, final User model, final int position) {
+                viewHolder.setName(model.getName());
+                viewHolder.setEmail(model.getEmail());
+
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MainActivity.this, com.rubenspessoa.carpooling.UserActivity.class);
+                        intent.putExtra("name", model.getName());
+                        startActivity(intent);
+                    }
+                });
+            }
+        };
+
+        mUsersList.setAdapter(firebaseRecyclerAdapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -70,14 +93,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
 
-        usersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, com.rubenspessoa.carpooling.UserActivity.class);
-                intent.putExtra("index", position);
-                startActivity(intent);
-            }
-        });
+    public static class UserViewHolder extends RecyclerView.ViewHolder {
+
+        View mView;
+        public UserViewHolder(View itemView) {
+            super(itemView);
+            mView = itemView;
+        }
+
+        public void setName(String name) {
+            TextView userNameRow = (TextView) mView.findViewById(R.id.userNameRow);
+            userNameRow.setText(name);
+        }
+
+        public void setEmail(String email) {
+            TextView userEmailRow = (TextView) mView.findViewById(R.id.userEmailRow);
+            userEmailRow.setText(email);
+        }
     }
 }

@@ -20,26 +20,35 @@
 
 package com.rubenspessoa.carpooling;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.rubenspessoa.carpooling.Util.User;
 
 public class AddActivity extends AppCompatActivity {
 
-    EditText input;
+    EditText inputEmail, inputName;
     Button createUserBtn;
+    private ProgressDialog mProgress;
+
+    public static DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    public static DatabaseReference mUsersRef = mRootRef.child("users");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-        input = (EditText) findViewById(R.id.nameEditText);
+        inputName = (EditText) findViewById(R.id.nameEditText);
+        inputEmail = (EditText) findViewById(R.id.emailEditText);
         createUserBtn = (Button) findViewById(R.id.createUserBtn);
+        mProgress = new ProgressDialog(this);
     }
 
     @Override
@@ -49,10 +58,16 @@ public class AddActivity extends AppCompatActivity {
         createUserBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userName = input.getText().toString();
-                User newUser = new User(userName);
-                MainActivity.manager.add(newUser);
-                //MainActivity.mUsersRef.child(userName).setValue(newUser);
+
+                mProgress.setMessage("Creating user...");
+                mProgress.show();
+
+                String userName = inputName.getText().toString();
+                String userEmail = inputEmail.getText().toString();
+                User newUser = new User(userName, userEmail);
+
+                mUsersRef.child(userName).setValue(newUser);
+
                 AddActivity.this.finish();
             }
         });

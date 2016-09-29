@@ -13,4 +13,6 @@
     <item name="addRideBtn" type="id"/>
     <item name="decreaseRideBtn" type="id"/>
     <item name="saveUserInfoBtn" type="id"/>
+    <item name="userNameRow" type="id"/>
+    <item name="userEmailRow" type="id"/>
 </resources>

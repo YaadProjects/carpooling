@@ -26,8 +26,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.rubenspessoa.carpooling.Util.Manager;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.rubenspessoa.carpooling.Util.User;
 
 import java.text.DecimalFormat;
@@ -40,8 +45,9 @@ public class UserActivity extends AppCompatActivity {
     private Button addRideBtn;
     private Button decreaseRideBtn;
     private Button saveUserInfoBtn;
-    private User user;
 
+    public static DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    public static DatabaseReference mUsersRef = mRootRef.child("users");
 
 
     @Override
@@ -61,8 +67,32 @@ public class UserActivity extends AppCompatActivity {
         super.onStart();
 
         Intent intent = getIntent();
-        this.user = Manager.getUser(intent.getExtras().getInt("index"));
-        showUpdatedValues();
+        String name = intent.getExtras().getString("name");
+
+        mUsersRef.child(name).addValueEventListener(new ValueEventListener() {
+            User user;
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                user = dataSnapshot.getValue(User.class);
+                showUpdatedValues();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        databaseError.getMessage(),
+                        Toast.LENGTH_SHORT);
+                toast.show();
+            }
+
+            private void showUpdatedValues() {
+                username.setText(user.getName());
+                ridesCount.setText(String.valueOf(user.getRidesCount()));
+                DecimalFormat df = new DecimalFormat("0.00");
+                owe.setText(("R$ " + String.valueOf(df.format(user.getRidesCount() * 2.5))));
+            }
+        });
 
         addRideBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,13 +117,10 @@ public class UserActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
-    private void showUpdatedValues() {
-        this.username.setText(this.user.name);
-        this.ridesCount.setText(String.valueOf(this.user.ridesCount));
-        DecimalFormat df = new DecimalFormat("0.00");
-        this.owe.setText(("R$ " + String.valueOf(df.format(user.ridesCount * 2.5))));
-    }
+
+
+
+
 }

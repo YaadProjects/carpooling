@@ -5,12 +5,18 @@ package com.rubenspessoa.carpooling.Util;
  */
 public class User {
 
-    public int ridesCount;
-    public String name;
-    public boolean owe;
 
-    public User(String name) {
+
+    private int ridesCount;
+    private String name;
+    private String email;
+    private boolean owe;
+
+    public User(){}
+
+    public User(String name, String email) {
         this.name = name;
+        this.email = email;
         this.ridesCount = 0;
         this.owe = false;
     }
@@ -34,5 +40,15 @@ public class User {
         return this.name;
     }
 
+    public String getEmail() {
+        return email;
+    }
 
+    public boolean owe() {
+        return owe;
+    }
+
+    public int getRidesCount() {
+        return ridesCount;
+    }
 }
